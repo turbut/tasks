@@ -1,0 +1,11 @@
+#Imaginary repository has folder inside named themes and you have to copy this folder inside  your base image. Create gitlab-ci.yml and Dockerfile. 
+docker-add-themes:
+    image: docker:latest
+    stage: build
+    services:
+      - docker:dind
+    before_script:
+      - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    script:
+      - docker pull nginx:latest
+      - docker build -t nginx:latest .
